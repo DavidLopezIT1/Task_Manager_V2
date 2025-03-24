@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  /* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* margin-bottom: 15%; */
+}
+
+/* Contenedor principal */
+.main-container {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 32%;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Título de la tarea */
+.task-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+    background-color: #ffcccc;
+    color: #d9534f;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Estilos del formulario */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Campos del formulario */
+.task-form input,
+.task-form textarea,
+.task-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    /* */
+}
+textarea{
+    height:120px ; 
+}
+
+/* Botón actualizar */
+.btn-update {
+    background-color: #ff6a00;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-update:hover {
+    background-color: #0056b3;
+}
+
+/* Grupo de botones */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Botón completar */
+.btn-complete {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-complete:hover {
+    background-color: #1e7e34;
+}
+
+/* Botón eliminar */
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #a71d2a;
+}
+
+</style>
+
+<div class="main-container">
+    <div class="task-container">
+        <h2 class="task-title">{{ task.title }}</h2>
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="task-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-update">Update</button>
+        </form>
+
+        <div class="button-group">
+            <form action="{% url 'complete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-complete">Complete</button>
+            </form>
+
+            <form action="{% url 'delete_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-delete">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
