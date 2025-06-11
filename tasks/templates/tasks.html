@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'base_lateral_panel.html' %}
 {% block content %}
 
 <style>
-  /* Estilos generales */
+
   body {
       font-family: 'Arial', sans-serif;
       background-color: #f4f4f4;
@@ -15,7 +15,7 @@
       min-height: 100vh;
   }
 
-  /* Contenedor principal */
+
   .main-container {
       width: 100%;
       max-width: 600px;
@@ -26,9 +26,11 @@
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       margin-left: 30%;
       margin-top: 25px;
+      max-height: 80vh;
+      overflow-y: auto;
   }
 
-  /* Título */
+
   .task-title {
       font-size: 24px;
       font-weight: bold;
@@ -37,7 +39,7 @@
       margin-bottom: 20px;
   }
 
-  /* Lista de tareas */
+
   .task-list {
       list-style: none;
       padding: 0;
@@ -50,10 +52,6 @@
       border-radius: 5px;
       border: solid 2px #ff6a004e;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  a {
-    transform: translateY(-10px);
   }
 
   .task-item a {
@@ -72,7 +70,6 @@
       margin-top: 5px;
   }
   data{
-    /* color: rgb(143, 5, 5); */
     color:#ff6a00;
   }
   .user{

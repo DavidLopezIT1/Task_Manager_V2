@@ -60,7 +60,8 @@ def home(request):
 @login_required
 def signout(request):
     logout(request)
-    return redirect('home')
+    return render(request, 'home.html')
+
 
 
 def signin(request):
@@ -90,20 +91,6 @@ def task_detail(request, task_id):
         except ValueError:
             return render(request, 'task_detail.html', {'task': task, 'form': form, 'error': 'Error updating task.'})
 
-# def task_detail(request, task_id):
-#     if request.method == 'GET':
-#         task = get_object_or_404(Task, pk=task_id, user=request.user)
-#         form = TaskForm(instance=task)
-#         return render(request, 'task_detail.html', {'task': task, 'form': form})
-#     else:
-#         try:
-#             task = get_object_or_404(Task, pk=task_id, user=request.user)
-#             form = TaskForm(request.POST, instance=task)
-#             form.save()
-#             return redirect('tasks')
-#         except ValueError:
-#             return render(request, 'task_detail.html', {'task': task, 'form': form, 'error': 'Error actualizando la tarea.'})
-
 @login_required
 def complete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
@@ -118,3 +105,19 @@ def delete_task(request, task_id):
     if request.method == 'POST':
         task.delete()
         return redirect('tasks')
+    
+@login_required
+def total_tasks(request):
+    user_tasks = Task.objects.filter(user=request.user)
+
+    context = {
+        'total_tasks': user_tasks.count(),
+        'total_pending': user_tasks.filter(datecompleted__isnull=True, important=False).count(),
+        'total_inprogress': user_tasks.filter(datecompleted__isnull=True, important=True).count(),
+        'total_completed': user_tasks.filter(datecompleted__isnull=False).count(),
+        'tasks': user_tasks.order_by('-created')
+    }
+
+    return render(request, 'dashboard.html', context)
+
+        

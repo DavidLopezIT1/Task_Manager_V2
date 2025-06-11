@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base_lateral_panel.html' %}
 
 {% block content %}
 
 <style>
-  /* Estilos generales */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -14,10 +14,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /* margin-bottom: 15%; */
-}
 
-/* Contenedor principal */
+}
 .main-container {
     width: 100%;
     max-width: 600px;
@@ -28,9 +26,9 @@ body {
     margin-left: 32%;
     margin-top: 25px;
     margin-bottom: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
-
-/* Título de la tarea */
 .task-title {
     font-size: 24px;
     font-weight: bold;
@@ -38,8 +36,6 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-
-/* Mensaje de error */
 .error-message {
     background-color: #ffcccc;
     color: #d9534f;
@@ -48,15 +44,12 @@ body {
     text-align: center;
     margin-bottom: 15px;
 }
-
-/* Estilos del formulario */
 .task-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Campos del formulario */
 .task-form input,
 .task-form textarea,
 .task-form select {
@@ -65,13 +58,11 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    /* */
 }
 textarea{
     height:120px ; 
 }
 
-/* Botón actualizar */
 .btn-update {
     background-color: #ff6a00;
     color: white;
@@ -87,14 +78,12 @@ textarea{
     background-color: #0056b3;
 }
 
-/* Grupo de botones */
 .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Botón completar */
 .btn-complete {
     background-color: #28a745;
     color: white;
@@ -110,7 +99,6 @@ textarea{
     background-color: #1e7e34;
 }
 
-/* Botón eliminar */
 .btn-delete {
     background-color: #dc3545;
     color: white;
