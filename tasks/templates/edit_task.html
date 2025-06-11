@@ -1,0 +1,183 @@
+{% extends 'base_lateral_panel.html' %}
+
+{% block content %}
+
+<style>
+  /* Estilos generales */
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+  }
+
+  /* Contenedor principal */
+  .main-container {
+      width: 100%;
+      max-width: 1000px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      margin-left: 10%;
+      margin-top: 25px;
+
+  }
+
+  /* Título */
+  .task-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #ff6a00;
+      padding-bottom: 10px;
+  }
+
+  /* Mensaje de error */
+  .error-message {
+      background-color: #ffebee;
+      color: #c62828;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      border-left: 4px solid #c62828;
+  }
+
+  /* Estilos del formulario */
+  .task-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .task-form input,
+  .task-form textarea,
+  .task-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 13px;
+      box-sizing: border-box;
+  }
+
+  .task-form input[type="file"] {
+      padding: 8px;
+  }
+
+  .task-form input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+  }
+
+  .task-form label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      font-size: 13px;
+  }
+
+  /* Botones */
+  .btn-update {
+      background-color: #ff6a00;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+  }
+
+  .btn-update:hover {
+      background-color: #e65c00;
+  }
+
+  .btn-back {
+      background-color: #6c757d;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-right: 10px;
+      transition: background 0.3s;
+          font-size: 16px;
+  }
+
+  .btn-back:hover {
+      background-color: #5a6268;
+      text-decoration: none;
+      color: white;
+  }
+
+  .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+  }
+
+  .btn-complete {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-complete:hover {
+    background-color: #1e7e34;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #a71d2a;
+}
+
+</style>
+
+<div class="main-container">
+    <h1 class="task-title">Editar: {{ task.title }}</h1>
+    
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+    
+    <form method="POST" enctype="multipart/form-data" class="task-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="button-group">
+            <a href="{% url 'tasks' %}" class="btn-back">← Cancelar</a>
+            <button type="submit" class="btn-update">Guardar Cambios</button>
+            <a href="{% url 'complete_task' task.id %}" class="btn btn-complete">Complete</a>
+            <a href="{% url 'delete_task' task.id %}" class="btn btn-delete">Delete</a>
+            
+
+
+
+            
+
+
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -31,7 +31,6 @@
     </style>
   </head>
   <body>
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="/">Task Manager</a>
@@ -47,7 +46,6 @@
       </div>
     </nav>
 
-    <!-- SIDEBAR -->
     <style>
       .sidebar {
         position: fixed;
@@ -55,7 +53,6 @@
         left: 0;
         height: 100%;
         width: 220px;
-        /* background-color: #f8f9fa; */
         background-color: rgb(27, 32, 36);
         padding-top: 2rem;
         border-right: 1px solid #dee2e6;
@@ -65,7 +62,6 @@
       .sidebar a {
         display: block;
         padding: 0.75rem 1.25rem;
-        /* color: #212529; */
         color: #dee2e6;
         text-decoration: none;
         font-weight: 500;
@@ -83,19 +79,18 @@
     </style>
 
     <div class="sidebar">
-      <a href="{% url 'total_tasks' %}">🏠 Dashboard</a>
-      <a href="{% url 'tasks' %}">📝 All Tasks</a>
-      <a href="{% url 'tasks_completed' %}">✅ Completed</a>
-      <a href="{% url 'create_task' %}">➕ Create Task</a>
+      <a href="{% url 'total_tasks' %}">&#128202; Dashboard</a>
+      <a href="{% url 'tasks' %}">&#128209; All Tasks</a>
+      <a href="{% url 'tasks_completed' %}">&#128681; Completed</a>
+      <a href="{% url 'create_task' %}">&#128240; Create Task</a>
       {% if user.is_authenticated %}
-      <a href="/logout">🚪 Logout</a>
+      <a href="/logout">&#128682; Logout</a>
       {% else %}
       <a href="/signin">🔐 Login</a>
       <a href="/signup">🧾 Register</a>
       {% endif %}
     </div>
 
-    <!-- CONTENIDO -->
     <div class="main-content">
       {% block content %}
       {% endblock %}
